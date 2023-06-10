@@ -43,6 +43,7 @@ def guess(A_followers, B_followers):
 def game_start():
 
 	# TODO: #5 ensure that both items can't be the same item. 
+	#BUG: #6 item 2 is the same as item 1
 	print(art.logo)
 	item1 = get_game_item()
 	print(f"Item 1: {item1}")
