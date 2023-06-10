@@ -21,15 +21,46 @@ def get_values(selected_dict):
 	value_list = [name, followers, desc, country]
 	return value_list
 
+def compare_followers(A_followers, B_followers, user_ans):
+	"""This function compares two follow counts. If the user guessed the correct option, the function returns 1 otherwise 0."""
+	if(A_followers > B_followers and user_ans == "A"):
+		return 1
+	elif(B_followers > A_followers and user_ans == "B"):
+		return 1 
+	else: 
+		return 0
+
+
+def guess(A_followers, B_followers):
+	user_guess = input("Who has more followers?").upper()
+	comparison_results = compare_followers(A_followers, B_followers, user_guess)
+	if(comparison_results == 1):
+		print("You are correct")
+	else: 
+		print("You are not correct")
+
+
 def game_start():
 
-	# TODO: #3 item needs to be redacted to hide the follow count. 
-	# TODO: #4 follow count needs to be saved in a separate variable
+	# TODO: #5 ensure that both items can't be the same item. 
 	print(art.logo)
 	item1 = get_game_item()
-	item_values = get_values(item1)
-	follow_count_A = item_values[1]
-	print(f"Compare A: {item_values[0]}, a {item_values[2]} from {item_values[3]}")
+	print(f"Item 1: {item1}")
+	item2 = get_game_item()
+	print(f"Item 2: {item1}")
+	while(item1 == item2):
+		item2 = get_game_item()
+	else:
+		item1_values = get_values(item1)
+		item2_values  = get_values(item1)
+		follow_count_A = item1_values[1]
+		follow_count_B = item2_values[1]
+		print(f"Compare A: {item1_values[0]}, a {item1_values[2]} from {item1_values[3]}\n")
+		print(art.vs)
+		print(f"Compare B: {item2_values[0]}, a {item2_values[2]} from {item2_values[3]}\n")
+		guess(follow_count_A, follow_count_B)
+		
+
 
 
 
