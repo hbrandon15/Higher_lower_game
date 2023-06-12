@@ -31,28 +31,32 @@ def compare_followers(A_followers, B_followers, user_ans):
 	else: 
 		return 0
 
-def calculate_score(user_correct):
-	"""Accepts a boolean to see if the user got the correct answer. If user correct, add 1 to score. Else, return current score."""
+def game_continue(user_correct, current_score):
+	"""Accepts a boolean and the current score to see if the user got the correct answer and calculates score. If user correct, add 1 to score. Else, return current score."""
 	if user_correct:
-		score  += 1
-		return score
+		current_score  += 1
+		print(f"Current score is {current_score}")
+		return current_score
 	else:
-		return score
+		print(f"Game over! You finished the game with an overall score of {current_score}")
+		return current_score
 
 
 
 def guess(A_followers, B_followers):
+	"""Accepts two follower counts and asks the user to guess which item has the larger number. If user is correct return True, else False"""
 	user_guess = input("Who has more followers?\n").upper()
 	comparison_results = compare_followers(A_followers, B_followers, user_guess)
 	if(comparison_results == 1):
 		print(f"You are correct!")
+		return True
 	else: 
 		print("You are not correct")
+		return False
 
 
 def game_start():
-
-
+	score = 0
 	print(art.logo)
 	item1 = get_game_items()[0]
 	item2 = get_game_items()[1]
@@ -65,7 +69,8 @@ def game_start():
 	print(f"Compare A: {item1_values[0]}, a {item1_values[2]} from {item1_values[3]}\n")
 	print(art.vs)
 	print(f"Compare B: {item2_values[0]}, a {item2_values[2]} from {item2_values[3]}\n")
-	guess(follow_count_A, follow_count_B)
+	game_continue(guess(follow_count_A, follow_count_B),score)
+
 		
 
 
