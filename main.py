@@ -20,16 +20,7 @@ def get_values(selected_dict):
 	value_list = [name, followers, desc, country]
 	return value_list
 
-def compare_followers(list1, list2, user_ans):
-	"""This function compares two follow counts. If the user guessed the correct option, the function returns 1 otherwise 0."""
-	if(A_followers > B_followers and user_ans == "A"):
-		print(f"{A_followers} is greater than {B_followers}!")
-		return 1, user_ans
-	elif(B_followers > A_followers and user_ans == "B"):
-		print(f"{B_followers} is greater than {A_followers}!")
-		return 1, user_ans
-	else: 
-		return 0
+
 
 def game_continue(user_correct, current_score):
 	"""Accepts a boolean and the current score to see if the user got the correct answer and calculates score. If user correct, add 1 to score. Else, return current score."""
