@@ -31,6 +31,15 @@ def compare_followers(A_followers, B_followers, user_ans):
 	else: 
 		return 0
 
+def calculate_score(user_correct):
+	"""Accepts a boolean to see if the user got the correct answer. If user correct, add 1 to score. Else, return current score."""
+	if user_correct:
+		score  += 1
+		return score
+	else:
+		return score
+
+
 
 def guess(A_followers, B_followers):
 	user_guess = input("Who has more followers?\n").upper()
