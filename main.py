@@ -5,10 +5,9 @@ import random
 
 
 
-def get_game_item():
+def get_game_items():
 	"""Returns a random dictionary item from the game data list"""
-	item = random.choice(game_data.data)
-	return item
+	return random.choices(game_data.data, k =2)
 
 
 def get_values(selected_dict):
@@ -42,24 +41,25 @@ def guess(A_followers, B_followers):
 
 def game_start():
 
-	# TODO: #5 ensure that both items can't be the same item. 
-	#BUG: #6 item 2 is the same as item 1
+
 	print(art.logo)
-	item1 = get_game_item()
-	print(f"Item 1: {item1}")
-	item2 = get_game_item()
-	print(f"Item 2: {item1}")
-	while(item1 == item2):
-		item2 = get_game_item()
-	else:
-		item1_values = get_values(item1)
-		item2_values  = get_values(item1)
-		follow_count_A = item1_values[1]
-		follow_count_B = item2_values[1]
-		print(f"Compare A: {item1_values[0]}, a {item1_values[2]} from {item1_values[3]}\n")
-		print(art.vs)
-		print(f"Compare B: {item2_values[0]}, a {item2_values[2]} from {item2_values[3]}\n")
-		guess(follow_count_A, follow_count_B)
+	item1 = get_game_items()[0]
+	item2 = get_game_items()[1]
+	print(f"item 1 is {item1}")
+	print(f"item 2 is {item2}")
+	
+
+	# while(item1 == item2):
+	# 	item2 = get_game_item()
+	# else:
+	# 	item1_values = get_values(item1)
+	# 	item2_values  = get_values(item1)
+	# 	follow_count_A = item1_values[1]
+	# 	follow_count_B = item2_values[1]
+	# 	print(f"Compare A: {item1_values[0]}, a {item1_values[2]} from {item1_values[3]}\n")
+	# 	print(art.vs)
+	# 	print(f"Compare B: {item2_values[0]}, a {item2_values[2]} from {item2_values[3]}\n")
+	# 	guess(follow_count_A, follow_count_B)
 		
 
 
