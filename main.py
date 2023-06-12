@@ -20,14 +20,14 @@ def get_values(selected_dict):
 	value_list = [name, followers, desc, country]
 	return value_list
 
-def compare_followers(A_followers, B_followers, user_ans):
+def compare_followers(list1, list2, user_ans):
 	"""This function compares two follow counts. If the user guessed the correct option, the function returns 1 otherwise 0."""
 	if(A_followers > B_followers and user_ans == "A"):
 		print(f"{A_followers} is greater than {B_followers}!")
-		return 1
+		return 1, user_ans
 	elif(B_followers > A_followers and user_ans == "B"):
 		print(f"{B_followers} is greater than {A_followers}!")
-		return 1 
+		return 1, user_ans
 	else: 
 		return 0
 
@@ -43,16 +43,20 @@ def game_continue(user_correct, current_score):
 
 
 
-def guess(A_followers, B_followers):
-	"""Accepts two follower counts and asks the user to guess which item has the larger number. If user is correct return True, else False"""
+def guess(A_list, B_list):
+	"""Accepts two list items and asks the user to guess which item has the larger number. If user is correct return 1 for True AND correct list, else False"""
 	user_guess = input("Who has more followers?\n").upper()
-	comparison_results = compare_followers(A_followers, B_followers, user_guess)
-	if(comparison_results == 1):
-		print(f"You are correct!")
-		return True
+	A_follower = A_list[1]
+	B_follower = B_list[1]
+	if(A_follower > B_follower and user_guess == "A"):
+		print(f"{A_follower} is greater than {B_follower}!")
+		return 1, A_list
+	elif(B_follower > A_follower and user_guess == "B"):
+		print(f"{B_follower} is greater than {A_follower}!")
+		return 1, B_list
 	else: 
-		print("You are not correct")
-		return False
+		return 0
+
 
 
 def game_start():
@@ -69,7 +73,8 @@ def game_start():
 	print(f"Compare A: {item1_values[0]}, a {item1_values[2]} from {item1_values[3]}\n")
 	print(art.vs)
 	print(f"Compare B: {item2_values[0]}, a {item2_values[2]} from {item2_values[3]}\n")
-	game_continue(guess(follow_count_A, follow_count_B),score)
+
+		
 
 		
 
