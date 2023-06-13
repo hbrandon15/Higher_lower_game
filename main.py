@@ -30,22 +30,23 @@ def game_continue(user_correct, current_score):
 	else:
 		print(f"Game over! You finished the game with an overall score of {current_score}")
 		return current_score
+	
 
 
 
-def guess(A_list, B_list):
-	"""Accepts two list items and asks the user to guess which item has the larger number. If user is correct return 1 for True AND correct list, else False"""
-	user_guess = input("Who has more followers?\n").upper()
-	A_follower = A_list[1]
-	B_follower = B_list[1]
-	if(A_follower > B_follower and user_guess == "A"):
-		print(f"{A_follower} is greater than {B_follower}!")
-		return 1, A_list
-	elif(B_follower > A_follower and user_guess == "B"):
-		print(f"{B_follower} is greater than {A_follower}!")
-		return 1, B_list
-	else: 
-		return 0
+
+def check_answer(user_guess, A_follower, B_follower):
+	"""Accepts two dictionary items and asks the user to guess which item has the larger follower count. If user is correct return 1 for True AND correct list, else False"""
+	if A_follower > B_follower:
+		if user_guess == "A":
+			return True
+		else:
+			return False
+	elif B_follower > A_follower:
+		if user_guess == "B":
+			return True
+		else:
+			return False
 	
 
 
@@ -53,16 +54,34 @@ def guess(A_list, B_list):
 def game_start():
 	score = 0
 	print(art.logo)
-	item_a = get_game_item()
-	item_b = get_game_item()
-	if item_a == item_b:
-		item_b = random.choice(game_data.data)
+
+	game_should_continue = True
+
+	while game_should_continue:
+		item_a = get_game_item()
+		item_b = get_game_item()
+		if item_a == item_b:
+			item_b = random.choice(game_data.data)
+		
+
+		print(f"Compare A: {format_data(item_a)}")
+		print(art.vs)
+		print(f"Against B: {format_data(item_b)}")
+
+		guess = input("Who has more followers? Type 'A' or 'B': ").upper()
+		A_follower_count = item_a["follower_count"]
+		B_follower_count = item_b["follower_count"]
+
+		is_correct = check_answer(guess, A_follower_count, B_follower_count)
+
+		if is_correct:
+			score += 1
+			print(f"You are correct! Current score is: {score}")
+		else: 
+			print(f"Sorry, you are wrong. Final score is: {score}")
+			game_should_continue = False
 	
 
-	print(f"Compare A: {format_data(item_a)}")
-	print(f"Compare B: {format_data(item_b)}")
-	# print(art.vs)
-	# print(f"Compare B: {item2_values[0]}, a {item2_values[2]} from {item2_values[3]}\n")
 
 	# is_user_correct = True
 	# if guess(item1_values,item2_values)[0] == 1:
