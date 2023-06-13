@@ -1,6 +1,7 @@
 import art
 import game_data
 import random
+import os 
 
 
 
@@ -54,13 +55,14 @@ def check_answer(user_guess, A_follower, B_follower):
 def game_start():
 	score = 0
 	print(art.logo)
+	item_b = get_game_item()
 
 	game_should_continue = True
 
 	while game_should_continue:
-		item_a = get_game_item()
-		item_b = get_game_item()
-		if item_a == item_b:
+		item_a = item_b
+		item_b = random.choice(game_data.data)
+		while item_a == item_b:
 			item_b = random.choice(game_data.data)
 		
 
@@ -74,8 +76,12 @@ def game_start():
 
 		is_correct = check_answer(guess, A_follower_count, B_follower_count)
 
+		os.system('clear')
+		print(art.logo)
+
 		if is_correct:
 			score += 1
+			
 			print(f"You are correct! Current score is: {score}")
 		else: 
 			print(f"Sorry, you are wrong. Final score is: {score}")
